@@ -10,7 +10,10 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 class UserServiceTest {
-    UserService userService;
+    private static final User VANYA = new User(1, "Ivan", "1111");
+    private static final User PETYA = new User(2, "Patya", "2222");
+
+    private UserService userService;
 
     @BeforeEach
     void init() {
@@ -34,10 +37,8 @@ class UserServiceTest {
     @Test
     void shouldReturnUserIfCollectionNotEmpty() {
         System.out.println("Test2");
-        User vanya = new User("Ivan", "1111");
-        User petya = new User("Patya", "2222");
-        userService.add(vanya);
-        userService.add(petya);
+        userService.create(VANYA);
+        userService.create(PETYA);
 
         List<User> list = userService.getAll();
 
@@ -46,7 +47,7 @@ class UserServiceTest {
 
     @Test
     void noLogin() {
-        Assertions.assertDoesNotThrow(() -> userService.login("111", "1111");
+        Assertions.assertDoesNotThrow(() -> userService.login("111", "1111"));
     }
 
     @AfterEach

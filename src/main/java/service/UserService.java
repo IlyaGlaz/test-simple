@@ -13,20 +13,51 @@ public class UserService {
         return users;
     }
 
-    public void add(User user) {
-        users.add(user);
+    // TODO: 16.09.2023 Протестировать получение пользователя по id.
+    public Optional<User> getById(int id) {
+        return users.stream()
+                .filter(user -> user.getId() == id)
+                .findFirst();
     }
 
-    public boolean login(String name, String password) {
+    // TODO: 16.09.2023 Протестировать метод на уникальность id
+    //  пользователей в системе при добавлении нового пользователя.
+    public void create(User newUser) {
+        boolean unique = users.stream()
+                .noneMatch(user -> user.getId() == newUser.getId());
+
+        if (unique) {
+            users.add(newUser);
+        } else {
+            throw new IllegalArgumentException();
+        }
+    }
+
+    // TODO: 16.09.2023 Протестировать смену username
+    public User updateUsername(int id, String newUsername) {
+        User targetUser = users.stream()
+                .filter(user -> user.getId() == id)
+                .findFirst()
+                .orElseThrow(IllegalArgumentException::new);
+
+        targetUser.setUsername(newUsername);
+        return targetUser;
+    }
+
+    // TODO: 16.09.2023 Протестировать метод на то, что получает пользователя, если такой пользователь есть.
+    public Optional<User> login(String name, String password) {
         if (name.isBlank() || password.isBlank()) {
             throw new IllegalArgumentException();
         }
 
-        Optional<User> maybeUser = users.stream()
-                .filter(user -> user.getName().equals(name))
+        return users.stream()
+                .filter(user -> user.getUsername().equals(name))
                 .filter(user -> user.getPassword().equals(password))
                 .findFirst();
+    }
 
-        return maybeUser.isPresent();
+    // TODO: 16.09.2023 Протестировать удаление пользователя.
+    public boolean delete(User user) {
+        return users.remove(user);
     }
 }

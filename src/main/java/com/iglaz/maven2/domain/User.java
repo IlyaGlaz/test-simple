@@ -3,20 +3,38 @@ package com.iglaz.maven2.domain;
 import java.util.Objects;
 
 public class User {
-    String name;
-    String password;
+    private int id;
+    private String username;
+    private String password;
 
-    public User(String name, String password) {
-        this.name = name;
+    public User(int id, String username, String password) {
+        this.id = id;
+        this.username = username;
         this.password = password;
     }
 
-    public String getName() {
-        return name;
+    public int getId() {
+        return id;
+    }
+
+    public String getUsername() {
+        return username;
     }
 
     public String getPassword() {
         return password;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     @Override
@@ -24,11 +42,20 @@ public class User {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return Objects.equals(name, user.name) && Objects.equals(password, user.password);
+        return id == user.id && Objects.equals(username, user.username) && Objects.equals(password, user.password);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, password);
+        return Objects.hash(id, username, password);
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name='" + username + '\'' +
+                ", password='" + password + '\'' +
+                '}';
     }
 }
