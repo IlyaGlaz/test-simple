@@ -1,7 +1,7 @@
 package service;
 
-import com.iglaz.maven2.domain.User;
-import com.iglaz.maven2.dao.UserDao;
+import com.iglaz.testsimple.dao.UserDao;
+import com.iglaz.testsimple.domain.User;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;

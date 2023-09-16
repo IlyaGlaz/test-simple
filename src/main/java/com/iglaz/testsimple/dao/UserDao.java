@@ -1,4 +1,4 @@
-package com.iglaz.maven2.dao;
+package com.iglaz.testsimple.dao;
 
 public class UserDao {
     public boolean delete() {

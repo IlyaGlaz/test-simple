@@ -1,4 +1,4 @@
-package com.iglaz.maven2.domain;
+package com.iglaz.testsimple.domain;
 
 import java.util.Objects;
 
