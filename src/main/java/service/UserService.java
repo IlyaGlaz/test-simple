@@ -1,13 +1,20 @@
 package service;
 
 import com.iglaz.maven2.domain.User;
+import com.iglaz.maven2.dao.UserDao;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
 public class UserService {
     private final List<User> users = new ArrayList<>();
+    private final UserDao userDao;
+
+    public UserService(UserDao userDao) {
+        this.userDao = userDao;
+    }
 
     public List<User> getAll() {
         return users;
@@ -31,6 +38,10 @@ public class UserService {
         } else {
             throw new IllegalArgumentException();
         }
+    }
+
+    public void add(User... newUsers) {
+        users.addAll(Arrays.asList(newUsers));
     }
 
     // TODO: 16.09.2023 Протестировать смену username
@@ -58,6 +69,6 @@ public class UserService {
 
     // TODO: 16.09.2023 Протестировать удаление пользователя.
     public boolean delete(User user) {
-        return users.remove(user);
+        return userDao.delete();
     }
 }
